@@ -23,12 +23,14 @@ const SignUp = () => {
                             id="firstName"
                             label="First Name"
                             variant="outlined"
-                            size='small' />
+                            size='small'
+                            style={{ width: "47%" }} />
                         <TextField
                             id="lastname"
                             label="Last Name"
                             variant="outlined"
-                            size='small' />
+                            size='small'
+                            style={{ width: "47%" }} />
                     </div>
                     <div>
                         <TextField
@@ -44,13 +46,15 @@ const SignUp = () => {
                             label="Password"
                             variant="outlined"
                             size='small'
-                            type="password" />
+                            type="password"
+                            style={{ width: "47%" }} />
 
                         <TextField
                             id="confirm"
                             label="Confirm"
                             variant="outlined"
-                            size='small' />
+                            size='small'
+                            style={{ width: "47%" }} />
                     </div>
                     <div>
                         <FormControlLabel

@@ -15,7 +15,7 @@ body {
 .signup-box{
     border: 1px solid #bbb;
     width: 750px;
-    max-width: 600px;
+    /* max-width: 600px; */
     height: 500px;
     display: flex;
     flex-direction: row;
@@ -43,6 +43,7 @@ body {
     justify-content: space-around;
     align-items: flex-start;
     height: 100%;
+    width: 100%;
 }
 
 .signup-header{
@@ -62,6 +63,7 @@ body {
 }
 
 .signup-body div{
+    border: 1px solid;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
