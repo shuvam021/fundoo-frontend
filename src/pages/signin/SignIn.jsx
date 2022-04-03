@@ -1,31 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './SignIn.css'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import GoogleLogo from '../../assets/Google_2015_logo.svg.png';
-import { userSignin } from '../../services/UserService'
+import { userSignIn } from '../../services/UserService'
 
 
-const emailRegex = /^[a-zA-Z]+[a-zA-Z0-9]*[- . + _]?[a-zA-Z0-9]+[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]+$/
+const emailRegex = /^[a-zA-Z]+[a-zA-Z0-9]*[-.+_]?[a-zA-Z0-9]+[@][a-z0-9]+[.][a-z]+[.]?[a-z]+$/
 const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&-+=()])([a-zA-Z0-9]*).{8,}$/;
 
 const SignIn = () => {
     const [data, setData] = React.useState({ email: '', password: '' })
 
-    const emailMethod = e => {
-        setData({ ...data, email: e.target.value })
-        console.log(e.target.value);
-    }
+    const emailMethod = e => {setData({ ...data, email: e.target.value })}
+    const passwordMethod = e => {setData({ ...data, password: e.target.value })}
 
-    const passwordMethod = e => {
-        setData({ ...data, password: e.target.value })
-        console.log(e.target.value);
-    }
-
-    const [emailError, setEmailError] = React.useState(false)
+    const [emailErr, setEmailErr] = React.useState(false)
     const [emailHelper, setEmailHelper] = React.useState('')
 
-    const [passwordError, setPasswordError] = React.useState(false)
+    const [passwordErr, setPasswordErr] = React.useState(false)
     const [passwordHelper, setPasswordHelper] = React.useState('')
 
     const emailValidate = emailRegex.test(data.email)
@@ -33,28 +26,22 @@ const SignIn = () => {
 
     const onSubmit = () => {
         // validate email
-        if (emailValidate == true) {
-            setEmailError(false)
-            setEmailHelper('')
-        }
-        else {
-            setEmailError(true)
-            setEmailHelper('Enter the correct email!!!')
-        }
+        setEmailErr(false)
+        setPasswordErr(false)
 
         // validate password
-        if (passwordValidate == true) {
-            setPasswordError(false)
-            setPasswordHelper('')
+        if (!emailValidate) {
+            setEmailErr(true)
+            setEmailHelper('Enter the correct email!!!')
         }
-        else {
-            setPasswordError(true)
+        if (!passwordValidate) {
+            setPasswordErr(true)
             setPasswordHelper('Enter the correct password!!!')
         }
 
         // access login api with validated data
-        if (emailValidate === true && passwordValidate === true) {
-            userSignin(data)
+        if (emailValidate && passwordValidate) {
+            userSignIn(data)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
         }
@@ -74,7 +61,7 @@ const SignIn = () => {
                     variant="outlined"
                     size='small'
                     onChange={emailMethod}
-                    error={emailError}
+                    error={emailErr}
                     helperText={emailHelper}
                 />
                 <TextField
@@ -84,7 +71,7 @@ const SignIn = () => {
                     variant="outlined"
                     size='small'
                     onChange={passwordMethod}
-                    error={passwordError}
+                    error={passwordErr}
                     helperText={passwordHelper} />
             </div>
             <div className='signin-footer'>
