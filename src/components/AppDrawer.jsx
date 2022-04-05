@@ -76,13 +76,17 @@ export default function AppDrawer() {
                 <DrawerHeader><IconButton><ChevronRightIcon/></IconButton></DrawerHeader>
                 <Divider/>
                 <List>
-                    {menuItems.map(item => (
-                        <Grid container direction='column' justifyContent='center' alignItems="center">
-                            <Grid item><Link to={item.path}><IconButton>{item.icon}</IconButton></Link></Grid>
-                        </Grid>
-                    ))}
+                    <Grid container direction='column' justifyContent='center' alignItems="center">
+                        {menuItems.map((item, i) => (
+                            <Grid item key={i}>
+                                <Link to={item.path}>
+                                    <IconButton>{item.icon}</IconButton>
+                                </Link>
+                            </Grid>
+                        ))}
+                    </Grid>
                 </List>
             </Drawer>
         </Box>
-    );
+);
 }

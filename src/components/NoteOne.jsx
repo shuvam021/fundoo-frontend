@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
         fontSize: 16,
     },
     boxIcons: {
-        // flexGrow: 1,
         display: "flex",
         justifyContent: "space-evenly",
         color: "#666",
@@ -43,20 +42,17 @@ const useStyles = makeStyles(theme => ({
 }));
 export default function NoteOne({checkNoteBox}) {
     const classes = useStyles();
-    const switchNoteBox = ()=>checkNoteBox();
+    const switchNoteBox = () => checkNoteBox();
     return (
-        <Box
-            onClick={switchNoteBox}>
-            <Box className={classes.noteOne}>
-                <Box className={classes.box}>
-                    <Box className={classes.input}>
-                        <input className={classes.inputCl} type="text" placeholder="Take a note..."/>
-                    </Box>
-                    <Box className={classes.boxIcons}>
-                        <IconButton><CheckBoxOutlinedIcon/></IconButton>
-                        <IconButton><BrushOutlinedIcon/></IconButton>
-                        <IconButton><ImageOutlinedIcon/></IconButton>
-                    </Box>
+        <Box className={classes.noteOne}>
+            <Box className={classes.box} onClick={switchNoteBox}>
+                <Box className={classes.input}>
+                    <input className={classes.inputCl} type="text" placeholder="Take a note..."/>
+                </Box>
+                <Box className={classes.boxIcons}>
+                    <IconButton><CheckBoxOutlinedIcon/></IconButton>
+                    <IconButton><BrushOutlinedIcon/></IconButton>
+                    <IconButton><ImageOutlinedIcon/></IconButton>
                 </Box>
             </Box>
         </Box>

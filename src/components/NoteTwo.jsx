@@ -1,7 +1,6 @@
 import React from "react";
 import AddAlertOutlinedIcon from '@mui/icons-material/AddAlertOutlined';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
@@ -11,8 +10,9 @@ import Button from '@mui/material/Button';
 import {makeStyles} from "@mui/styles";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-// import Grid from "@mui/material/Grid";
-import {NoteData} from "../services/DataService"
+import {NoteData} from "../services/DataService";
+import ColorPopper from "./ColorPopper"
+
 
 const useStyles = makeStyles(style => ({
     noteTwo: {
@@ -26,7 +26,6 @@ const useStyles = makeStyles(style => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "stretch",
-
         width: "60%",
         maxWidth: 500,
         justifyContent: "space-around",
@@ -63,34 +62,40 @@ const useStyles = makeStyles(style => ({
 export default function NoteTwo() {
     const classes = useStyles();
 
-    const [data, setData] = React.useState({title:'', description:	''})
+    const [data, setData] = React.useState({title:'', description:	'', color: '', is_archived: false})
     const submitMethod = ()=>{
         NoteData(data)
             .then(res=> console.log("res", res))
             .catch(err=> console.log("err", err))
     }
 
+    const colorHandler = color => setData({...data, color: color })
+    const archiveHandler = ()=>setData({...data, is_archived: true})
     return (
         <Box className={classes.noteTwo}>
-            <Box className={classes.box}>
-                <input type="text" placeholder="Title" className={classes.field} onChange={e=> setData({...data, title:e.target.value })} />
-                <input type="text" placeholder="Take a note..." className={classes.field} onChange={e=> setData({...data, description:e.target.value })}/>
+            <Box className={classes.box} style={{backgroundColor: data.color}}>
+                <input
+                    type="text" placeholder="Title" className={classes.field}
+                    style={{backgroundColor: data.color}}
+                    onChange={e => setData({...data, title: e.target.value})}/>
+                <input
+                    className={classes.field}
+                    style={{backgroundColor: data.color}}
+                    type="text"
+                    placeholder="Take a note..."
+                    onChange={e => setData({...data, description: e.target.value})}/>
                 <Box className={classes.noteTwoActions}>
                     <Box className={classes.noteTwoIcons}>
-                        <IconButton><AddAlertOutlinedIcon/></IconButton>
-                        <IconButton><PersonAddAltIcon/></IconButton>
-                        <IconButton><PaletteOutlinedIcon/></IconButton>
-                        <IconButton><ImageOutlinedIcon/></IconButton>
-                        <IconButton><ArchiveOutlinedIcon/></IconButton>
-                        <IconButton><MoreVertOutlinedIcon/></IconButton>
-                        <IconButton><UndoOutlinedIcon/></IconButton>
-                        <IconButton><RedoOutlinedIcon/></IconButton>
+                        <IconButton size={"small"}><AddAlertOutlinedIcon fontSize={"inherit"}/></IconButton>
+                        <IconButton size={"small"}><PersonAddAltIcon fontSize={"inherit"}/></IconButton>
+                        <ColorPopper action="create" colorHandler={colorHandler}/>
+                        <IconButton size={"small"}><ImageOutlinedIcon fontSize={"inherit"}/></IconButton>
+                        <IconButton size={"small"} onClick={archiveHandler}><ArchiveOutlinedIcon fontSize={"inherit"}/></IconButton>
+                        <IconButton size={"small"}><MoreVertOutlinedIcon fontSize={"inherit"}/></IconButton>
+                        <IconButton size={"small"}><UndoOutlinedIcon fontSize={"inherit"}/></IconButton>
+                        <IconButton size={"small"}><RedoOutlinedIcon fontSize={"inherit"}/></IconButton>
                     </Box>
-                    <Button
-                        onClick={submitMethod}
-                        variant="text"
-                        className={classes.noteTwoButton}
-                    >Close</Button>
+                    <Button onClick={submitMethod} variant="text" className={classes.noteTwoButton}>Close</Button>
                 </Box>
             </Box>
         </Box>
