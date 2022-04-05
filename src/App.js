@@ -1,17 +1,21 @@
 import React from "react";
 import './App.css';
-// import Dashboard from './pages/dashboard/Dashboard';
-import SignIn from './pages/signin/SignIn';
-
-import SignUp from './pages/signup/SignUp';
+import Dashboard from "./pages/Dashboard";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 function App() {
     return (
-        <div className="App">
-            {/* <Dashboard /> */}
-            {/*<SignIn/>*/}
-            <SignUp/>
-        </div>
+        <BrowserRouter>
+            <div className="App">
+                <Switch>
+                    <Route exact path="/"><Dashboard/></Route>
+                    <Route path="/sign-in"><SignIn/></Route>
+                    <Route path="/sign-up"><SignUp/></Route>
+                </Switch>
+            </div>
+        </BrowserRouter>
     );
 }
 
