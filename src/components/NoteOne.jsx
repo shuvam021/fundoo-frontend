@@ -8,14 +8,6 @@ import {makeStyles} from "@mui/styles";
 import IconButton from "@mui/material/IconButton";
 
 const useStyles = makeStyles(theme => ({
-    noteOne: {
-        height: 60,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        alignItems: "center",
-        marginTop: 50
-    },
     box: {
         height: 50,
         width: "60%",
@@ -44,16 +36,14 @@ export default function NoteOne({checkNoteBox}) {
     const classes = useStyles();
     const switchNoteBox = () => checkNoteBox();
     return (
-        <Box className={classes.noteOne}>
-            <Box className={classes.box} onClick={switchNoteBox}>
-                <Box className={classes.input}>
-                    <input className={classes.inputCl} type="text" placeholder="Take a note..."/>
-                </Box>
-                <Box className={classes.boxIcons}>
-                    <IconButton><CheckBoxOutlinedIcon/></IconButton>
-                    <IconButton><BrushOutlinedIcon/></IconButton>
-                    <IconButton><ImageOutlinedIcon/></IconButton>
-                </Box>
+        <Box className={classes.box} onClick={switchNoteBox}>
+            <Box className={classes.input}>
+                <input className={classes.inputCl} type="text" placeholder="Take a note..."/>
+            </Box>
+            <Box className={classes.boxIcons}>
+                <IconButton><CheckBoxOutlinedIcon/></IconButton>
+                <IconButton><BrushOutlinedIcon/></IconButton>
+                <IconButton><ImageOutlinedIcon/></IconButton>
             </Box>
         </Box>
     )

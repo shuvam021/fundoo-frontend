@@ -15,12 +15,6 @@ import ColorPopper from "./ColorPopper"
 
 
 const useStyles = makeStyles(style => ({
-    noteTwo: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 50,
-    },
     box: {
         height: "100%",
         display: "flex",
@@ -72,7 +66,7 @@ export default function NoteTwo() {
     const colorHandler = color => setData({...data, color: color })
     const archiveHandler = ()=>setData({...data, is_archived: true})
     return (
-        <Box className={classes.noteTwo}>
+        // <Box className={classes.noteTwo} style={{border: "1px solid"}}>
             <Box className={classes.box} style={{backgroundColor: data.color}}>
                 <input
                     type="text" placeholder="Title" className={classes.field}
@@ -98,7 +92,7 @@ export default function NoteTwo() {
                     <Button onClick={submitMethod} variant="text" className={classes.noteTwoButton}>Close</Button>
                 </Box>
             </Box>
-        </Box>
+        // </Box>
     )
 }
 

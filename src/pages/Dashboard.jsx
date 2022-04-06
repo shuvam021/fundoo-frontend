@@ -6,8 +6,19 @@ import NoteTwo from "../components/NoteTwo";
 import NoteCard from "../components/NoteCard"
 import {getNoteData} from "../services/DataService"
 import {Box, Grid} from "@mui/material";
+import {makeStyles} from "@mui/styles";
+
+const useStyles = makeStyles(style => ({
+    noteTwo: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 50,
+    },
+}));
 
 export default function Dashboard() {
+    const classes = useStyles();
     const [note, setNote] = React.useState(false);
     const checkNoteBox = () => setNote(true)
     const [notesList, setNoteList] = React.useState([])
@@ -20,7 +31,9 @@ export default function Dashboard() {
         <Box>
             <AppDrawer/>
             <Header/>
-            {note ? <NoteTwo/> : <NoteOne checkNoteBox={checkNoteBox}/>}
+            <Box className={classes.noteTwo}>
+                {note ? <NoteTwo/> : <NoteOne checkNoteBox={checkNoteBox}/>}
+            </Box>
             <Grid my={1} spacing={3} container>
                 {notesList.map(
                     item => (<Grid item xs={12} sm={6} md={4} lg={3} key={item.id}><NoteCard item={item}/></Grid>)
