@@ -15,12 +15,12 @@ import {updateNoteArchiveData, updateNoteData} from "../services/DataService";
 
 
 const style = {
+    backgroundColor: 'background.paper',
+    width: 400,
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
     boxShadow: 24,
     px: 2,
     borderRadius: 2,
@@ -66,9 +66,9 @@ const useStyles = makeStyles({
     }
 })
 
-export default function NoteCard({item}) {
-    const [open, setOpen] = React.useState(false);
+export default function NoteCard({item, listenToNoteCard}) {
     const [obj, setObj] = React.useState({})
+    const [open, setOpen] = React.useState(false);
     const handleOpen = (item) => {
         setOpen(true)
         setObj(item)
@@ -100,8 +100,8 @@ export default function NoteCard({item}) {
 
     const classes = useStyles();
     return (
-        <div>
-            <Card variant={"outlined"} sx={{backgroundColor: item.color}}>
+        <>
+            <Card variant={"outlined"} sx={{backgroundColor: item.color}} minWidth={"xs"}>
                 <CardContent onClick={() => handleOpen(item)}>
                     <Typography sx={{mb: 1}} color="text.secondary" variant={"body1"}>{item.title}</Typography>
                     <Typography variant="body2">{item.description}</Typography>
@@ -109,7 +109,9 @@ export default function NoteCard({item}) {
                 <CardActions className={classes.iconBox}>
                     <IconButton size={"small"}><AddAlertOutlinedIcon fontSize={"inherit"}/></IconButton>
                     <IconButton size={"small"}><PersonAddAltIcon fontSize={"inherit"}/></IconButton>
-                    <ColorPopper action="update" colorHandler={updateColorHandler}/>
+
+                    <ColorPopper listenToNoteCard={listenToNoteCard} action="update" colorHandler={updateColorHandler}/>
+
                     <IconButton size={"small"}><ImageOutlinedIcon fontSize={"inherit"}/></IconButton>
                     <IconButton size={"small"} onClick={updateArchived}><ArchiveOutlinedIcon
                         fontSize={"inherit"}/></IconButton>
@@ -117,6 +119,7 @@ export default function NoteCard({item}) {
                 </CardActions>
             </Card>
             <Modal
+                sx={{[`MuiBox-root`]:{border: "none"}}}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -143,6 +146,6 @@ export default function NoteCard({item}) {
                     </Box>
                 </Box>
             </Modal>
-        </div>
+        </>
     )
 }

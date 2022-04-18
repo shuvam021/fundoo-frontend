@@ -33,6 +33,9 @@ const useStyles = makeStyles(style => ({
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
+        '@media (max-width: 500px)': {
+            border: '2px solid purple',
+        },
     },
     field: {
         outline: "none",
@@ -53,13 +56,16 @@ const useStyles = makeStyles(style => ({
     }
 }));
 
-export default function NoteTwo() {
+export default function NoteTwo(props) {
     const classes = useStyles();
 
     const [data, setData] = React.useState({title:'', description:	'', color: '', is_archived: false})
     const submitMethod = ()=>{
         NoteData(data)
-            .then(res=> console.log("res", res))
+            .then(res=> {
+                console.log("res", res)
+                props.listenToNoteTwo()
+            })
             .catch(err=> console.log("err", err))
     }
 

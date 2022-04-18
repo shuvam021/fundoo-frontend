@@ -2,7 +2,7 @@ import React from 'react'
 import GoogleLogo from '../assets/Google_2015_logo.svg.png';
 import SideImg from "../assets/account.svg"
 import {useHistory} from "react-router-dom";
-import {Box, Button, Checkbox, Container, FormControlLabel, Grid, TextField, Typography} from '@mui/material';
+import {Box, Button, Card, Checkbox, Container, FormControlLabel, Grid, TextField, Typography} from '@mui/material';
 import {userSignUp} from '../services/UserService'
 
 
@@ -12,20 +12,25 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&-+=()])([a-zA-Z0-9]*).
 
 const customStyles = {
     container: {
-        border: "1px solid", position: "absolute", top: "50%", left: "50%",
-        transform: "translate(-50%, -50%)", borderRadius: 1,
+        border: {xs: "none", sm:"none", md: "1px solid #bbb"},
+        position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+        borderRadius: 1,
+        height:"80%",
     },
     boxContainer: {
-        mt: 3, mb: 3, display: "flex",
-        flexDirection: "column", justifyContent: "center", alignItems: "center",
+        height:'100%',
+        display: "flex", justifyContent: "center", alignItems: "center",
     },
-    containerOne: {display: "flex", justifyContent: "center", alignContent: "center",},
-    boxForm: {mt: 3, mb: 3},
-    formLogo: {height: 30},
-    boxRightContainer: {display: {md: "block", sm: "none", xs: "none"}, mt: "auto", mb: "auto",},
+    containerOne: {
+        display: "flex", justifyContent: "center", alignContent: "center",
+        px: 2
+    },
+    boxForm: {my: 3},
+    formLogo: {height: 30, display: "flex", justifyContent: "flex-start"},
+    containerTwo: {display: {md: "block", sm: "none", xs: "none"}},
     boxRight: {
         display: "flex", flexDirection: "column", justifyContent: "center",
-        alignItems: "center", height: "auto", width: "90%"
+        height:"100%", px: 2
     },
     rightSideImg: {height: 200},
 };
@@ -90,10 +95,10 @@ export default function SignUp() {
                     <Grid item lg={8} md={8} sm={12} xs={12} sx={customStyles.containerOne}>
                         <Box component={"form"} maxWidth={"sm"} sx={customStyles.boxForm}>
                             <Box component={"img"} alt="Google Img" src={GoogleLogo} sx={customStyles.formLogo}/>
-                            <Typography variant={"h6"}>Sign Up</Typography>
-                            <Typography variant={"subtitle1"}>Use your Google Account</Typography>
+                            <Typography align={"left"} variant={"h4"}>Sign Up</Typography>
+                            {/*<Typography variant={"subtitle1"}>Use your Google Account</Typography>*/}
 
-                            <Grid container spacing={2} sx={{mt: 1}}>
+                            <Grid container spacing={2} sx={{my: 8}}>
                                 <Grid item sm={6} xs={12}>
                                     <TextField
                                         fullWidth
@@ -150,19 +155,19 @@ export default function SignUp() {
                                     />
                                 </Grid>
 
-                                <Grid item sm={4} xs={12}>
+                                <Grid item sm={4} xs={12} sx={{display:{xs: "flex"}}}>
                                     <FormControlLabel control={<Checkbox/>} label="Show password"/>
                                 </Grid>
-                                <Grid item sm={4} xs={6}>
+                                <Grid item sm={4} xs={6} sx={{display:{xs: "flex"}, justifyContent: {xs: "flex-start"}}}>
                                     <Button size="small">Sign in instead</Button>
                                 </Grid>
-                                <Grid item sm={4} xs={6}>
+                                <Grid item sm={4} xs={6} sx={{display:{xs: "flex"}, justifyContent: {xs:"flex-end"}}}>
                                     <Button variant="contained" size="small" onClick={formSubmit}>SignUp</Button>
                                 </Grid>
                             </Grid>
                         </Box>
                     </Grid>
-                    <Grid item lg={4} md={4} sx={customStyles.boxRightContainer}>
+                    <Grid item lg={4} md={4} sx={customStyles.containerTwo}>
                         <Box sx={customStyles.boxRight}>
                             <Box component={"img"} src={SideImg} alt="img" sx={customStyles.rightSideImg}/>
                             <Typography variant={"body1"}>One account. All of Google working for you.</Typography>

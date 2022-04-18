@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Paper from '@mui/material/Paper';
 
 
-export default function ColorPopper({colorHandler, action}) {
+export default function ColorPopper({colorHandler, action, listenToNoteCard}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -19,7 +19,8 @@ export default function ColorPopper({colorHandler, action}) {
             colorHandler(color)
         }
         if (action === "update") {
-            colorHandler(color)
+            // colorHandler(color)
+            listenToNoteCard(color)
         }
     }
 

@@ -19,3 +19,7 @@ export const updateNoteData = async (id, data) => {
 export const updateNoteArchiveData = async (id, data) => {
     return await axios.put(BASE_URI + `api/note-archive/${id}/`, data, headerConfig)
 }
+
+export const updateNoteColorData = async (id, data) => {
+    return await axios.put(BASE_URI + `api//update-color/${id}/`, data, headerConfig)
+}
